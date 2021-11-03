@@ -1,0 +1,13 @@
+<div class="container-fluid p-5 w-50" *ngIf="quote">
+    <div class="d-flex flex-column justify-content-between align-items-left">
+      <div class="d-flex flex-row p-2">
+        <h2>Quote from my collection</h2>
+      </div>
+      <div class="d-flex flex-row p-2">
+        <p>{{quote}}</p>
+      </div>
+      <div class="d-flex flex-row p-2 w-25">
+        <button class="btn btn-primary"(click)="getQuote()">Another one</button>
+      </div>
+    </div>
+</div>

@@ -12,6 +12,15 @@ import { HeroDetailComponent } from './component/hero-detail/hero-detail.compone
 import { MessagesComponent } from './component/messages/messages.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HeroSearchComponent } from './component/hero-search/hero-search.component';
+import { SummonerComponent } from './component/summoner/summoner.component';
+import { QuoteComponent } from './component/quote/quote.component';
+import { ChampionMasteryComponent } from './component/champion-mastery/champion-mastery.component';
+import { ChampionPanelComponent } from './component/champion-panel/champion-panel.component';
+import { ResumeComponent } from './component/resume/resume.component';
+import { HomeComponent } from './component/home/home.component';
+import { FooterComponent } from './component/footer/footer.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
+import { CatfactComponent } from './component/catfact/catfact.component';
 
 @NgModule({
   imports: [
@@ -23,9 +32,9 @@ import { HeroSearchComponent } from './component/hero-search/hero-search.compone
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataService, { dataEncapsulation: false }
+    // )
   ],
   declarations: [
     AppComponent,
@@ -33,7 +42,16 @@ import { HeroSearchComponent } from './component/hero-search/hero-search.compone
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    SummonerComponent,
+    QuoteComponent,
+    ChampionMasteryComponent,
+    ChampionPanelComponent,
+    ResumeComponent,
+    HomeComponent,
+    FooterComponent,
+    NavbarComponent,
+    CatfactComponent
   ],
   bootstrap: [ AppComponent ]
 })

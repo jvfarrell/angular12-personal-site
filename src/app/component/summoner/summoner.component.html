@@ -1,0 +1,151 @@
+<div class="d-flex flex-column align-items-center p-5 bg-dark text-white">
+  <div class="d-flex flex-row">
+    <!-- <label class="form-label" for="summoner-lookup">Summoner name: </label> -->
+    <input class="form-control" id="summoner-lookup" placeholder="Summoner Name" #sumName value="Azureus" size="50"/>
+  </div>
+  <!-- <div class="d-flex flex-row">
+    <div class="mt-3">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+        <label class="form-check-label" for="inlineCheckbox1">Top</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+        <label class="form-check-label" for="inlineCheckbox2">Jungle</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+        <label class="form-check-label" for="inlineCheckbox3">Mid</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+        <label class="form-check-label" for="inlineCheckbox4">Bot</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
+        <label class="form-check-label" for="inlineCheckbox5">Support</label>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="d-flex flex-row">
+    <!-- (click) passes input value to lookup() and then clears the input -->
+    <button class="btn btn-primary add-button mt-3" (click)="lookup(sumName.value); haveSearched=true">
+      Lookup Summoner
+    </button>
+  </div>
+</div>
+
+
+
+<div class="d-flex flex-column align-items-center p-2 bg-dark text-white" *ngIf="haveSearched">
+  <div class="d-flex flex-row">
+    <!-- icon -->
+    <img src='http://ddragon.leagueoflegends.com/cdn/11.20.1/img/profileicon/{{summoner?.profileIconId}}.png'
+    class="rounded-pill"
+    style="width: 100px;
+    height: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+  </div>
+  <div class="d-flex flex-row">
+    <!-- name -->
+    <h1 class="display-6">{{summoner?.name}}</h1>
+  </div>
+  <div class="d-flex flex-row">
+    <!-- level -->
+    <h4>Lvl: {{summoner?.summonerLevel}}</h4>
+  </div>
+  <div class="d-flex flex-row">
+    <button class="btn btn-secondary add-button mt-3" (click)="getLeagueStats();ranksGrabbed=true">Get Ranks</button>
+  </div>
+</div>
+
+<div class="d-flex flex-column align-items-center p-5 rankedArea" *ngIf="ranksGrabbed">
+  <!-- [ngStyle]="{'background-color': leagueColor}" something to try later with custom color per your rank by calling rankedColor(tier) -->
+  <div class="ranks d-flex flex-row gx-5 p-3 vround bg-blitz-field">
+    <div class="d-flex flex-column m-3" *ngFor="let league of leagueStats">
+      <div class="p-3 bg-blitz vround leagueStat">
+        <div class="d-flex flex-column p-2 align-items-center">
+          <img src='../../../assets/{{emblemService.getEmblemImg(league.tier)}}'
+          class="image-fluid "
+          style="width: 100px;
+              height: 100px">
+        </div>
+        <div class="d-flex flex-column p-2 ms-3 me-3 align-items-center blitz-green-text">
+          {{mapRankQ(league.queueType)}}
+        </div>
+        <div class="d-flex flex-column p-2 ms-3 me-3 align-items-center blitz-green-text">
+          {{capitalizeFirstLetter(league.tier)}} {{league.rank}} - {{league.leaguePoints}} LP
+        </div>
+        <!-- <div class="d-flex flex-column p-2">
+          {{league.leaguePoints}} LP
+        </div> -->
+      </div>
+    </div>
+    <!-- <div class="d-flex flex-column m-3">
+      <div class="p-3 border bg-light rounded-pill">Custom column padding</div>
+    </div>
+    <div class="d-flex flex-column m-3">
+      <div class="p-3 border bg-light rounded-pill">Custom column padding</div>
+    </div> -->
+  </div>
+</div>
+
+<!-- <div class="container-fluid p-3 bg-dark text-white w-50" *ngIf="haveSearched">
+  <h2 class="container mt-3"><img src='http://ddragon.leagueoflegends.com/cdn/11.20.1/img/profileicon/{{summoner?.profileIconId}}.png' style="width: 100px;
+    height: 100px">  {{summoner?.name}}</h2>
+  <div><span>profile Icon: </span>{{summoner?.profileIconId}}</div>
+  <div><span>id: </span>{{summoner?.id}}</div>
+  <div><span>level: </span>{{summoner?.summonerLevel}}</div>
+
+  <div *ngIf="haveSearched">
+    <button class="btn btn-secondary add-button" (click)="getLeagueStats();ranksGrabbed=true">Get Ranks</button>
+    <div >
+
+      <ul class="ranks">
+        <li *ngFor="let league of leagueStats">
+          <span class="leagueStat">
+            {{capitalizeFirstLetter(league.queueType)}}
+            <div>{{capitalizeFirstLetter(league.tier)}} {{league.rank}}</div>
+            <div>{{league.leaguePoints}} LP</div>
+            <div class="container pt-5 "><span>profile Icon: </span><img src='../../../assets/{{emblemService.getEmblemImg(league.tier)}}' style="width: 100px;
+              height: 100px"></div>
+          </span>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+</div> -->
+
+<!-- <div>
+<button class="add-button" (click)="getCatFact(); sumName.value='';haveCatFact=true">
+    Lookup CatFact
+  </button>
+  <h2 *ngIf="haveCatFact">{{catFact?.fact}}</h2>
+</div> -->
+
+<!-- <div class="media p-3 bg-dark text-white w-50" *ngIf="haveSearched">
+  <img class="mr-3" src='http://ddragon.leagueoflegends.com/cdn/11.20.1/img/profileicon/{{summoner?.profileIconId}}.png' alt="User Icon">
+  <div class="media-body">
+    <h5 class="mt-0">{{summoner?.name}}</h5>
+    <div><span>profile Icon: </span>{{summoner?.profileIconId}}</div>
+    <div><span>id: </span>{{summoner?.id}}</div>
+    <div><span>level: </span>{{summoner?.summonerLevel}}</div>
+  </div>
+</div> -->
+
+<!-- <div class="container-fluid p-3 bg-dark text-white w-50">
+  <div class="row gx-5 p-3 w-75 rounded bg-primary">
+    <div class="col">
+      <div class="p-3 border bg-light rounded">Custom column padding</div>
+    </div>
+    <div class="col">
+      <div class="p-3 border bg-light rounded">Custom column padding</div>
+    </div>
+    <div class="col">
+      <div class="p-3 border bg-light rounded">Custom column padding</div>
+    </div>
+  </div>
+</div> -->

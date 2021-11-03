@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 /* Application-wide Styles */
-h1 {
+/* h1 {
   color: #369;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
@@ -22,8 +22,19 @@ input[type="text"],
 button {
   color: #333;
   font-family: Cambria, Georgia, serif;
-}
+} */
 /* everywhere else */
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Open Sans, sans-serif;
+}
+body {
+  background-color: rgb(33, 37, 41);
+}
+
+.bg-blitz {
+  background-color: rgb(14, 16, 21);
+}
+
+.bg-blitz-field {
+  background-color: rgb(24, 26, 32);
 }

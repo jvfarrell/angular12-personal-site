@@ -1,6 +1,6 @@
 {
-  "name": "angular-heroes",
-  "version": "0.0.0",
+  "name": "angular12-personal-site",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
