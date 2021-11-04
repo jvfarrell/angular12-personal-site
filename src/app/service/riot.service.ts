@@ -4,6 +4,7 @@ import { League } from '../model/league';
 import { CatFact } from '../model/catFact';
 import { Summoner } from '../model/summoner';
 import { riotError } from '../model/riotError';
+import { environment } from 'src/environments/environment';
 
 import { HEROES } from '../mock-heroes';
 import { Observable, of, throwError } from 'rxjs';
@@ -54,7 +55,7 @@ export class RiotService {
 
   // /** GET summoner from the server */
   // getSummoner(summonerName: string): Observable<Summoner> {
-  //   const url = `${this.riotUrl}/lol/summoner/v4/summoners/by-name/${summonerName}`;
+  //   const url = `${environment.riotUrl}/lol/summoner/v4/summoners/by-name/${summonerName}`;
   //   return this.http.get<Summoner>(url, this.httpOptions)
   //     .pipe(
   //       tap(_ => this.log(`fetched summoner id=${summonerName}`)),
@@ -76,7 +77,7 @@ export class RiotService {
 
   /** GET summoner from the server */
   getSummoner(name: string): Observable<Summoner> {
-    const url = `${this.riotUrl}/lol/summoner/v4/summoners/by-name/${name}${this.apikey}`;
+    const url = `${environment.riotUrl}/lol/summoner/v4/summoners/by-name/${name}${environment.apikey}`;
     return this.http.get<Summoner>(url)
         .pipe(
           tap(_ => this.log(`fetched summoner id=${name}`)),
@@ -86,7 +87,7 @@ export class RiotService {
 
   /** GET leagues from the server */
   getLeague(encyptedSummonerId: string): Observable<League[]> {
-    const url = `${this.riotUrl}/lol/league/v4/entries/by-summoner/${encyptedSummonerId}${this.apikey}`;
+    const url = `${environment.riotUrl}/lol/league/v4/entries/by-summoner/${encyptedSummonerId}${environment.apikey}`;
     return this.http.get<League[]>(url)
       .pipe(
         tap(_ => this.log(`fetched league for=${encyptedSummonerId}`)),
@@ -97,11 +98,11 @@ export class RiotService {
   // private sum: Observable<{}>;
 
   // getSummoner(name: string) {
-  //   const urlsummoner = `${this.riotUrl}/lol/summoner/v4/summoners/by-name/${name}${this.apikey}`;
-  //   // const urlleague = `${this.riotUrl}/lol/league/v4/entries/by-summoner/${encyptedSummonerId}${this.apikey}`;
+  //   const urlsummoner = `${environment.riotUrl}/lol/summoner/v4/summoners/by-name/${name}${environment.apikey}`;
+  //   // const urlleague = `${environment.riotUrl}/lol/league/v4/entries/by-summoner/${encyptedSummonerId}${environment.apikey}`;
   //   this.sum = this.http
   //     .get(urlsummoner)
-  //     .pipe(mergeMap(sum => this.http.get(`${this.riotUrl}/lol/league/v4/entries/by-summoner/${this.sum.encyptedSummonerId}${this.apikey}`)));
+  //     .pipe(mergeMap(sum => this.http.get(`${environment.riotUrl}/lol/league/v4/entries/by-summoner/${this.sum.encyptedSummonerId}${environment.apikey}`)));
   // }
 
   /** Log a HeroService message with the MessageService */
