@@ -13,3 +13,8 @@
     transform: translateX(0);
   }
 }
+
+.games {
+  width: 25vw;
+  max-width: 300px;
+}
