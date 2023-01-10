@@ -9,41 +9,46 @@ import { environment } from 'src/environments/environment';
 import { HEROES } from '../mock-heroes';
 import { Observable, of, throwError } from 'rxjs';
 import { MessageService } from './message.service';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpResponse,
+} from '@angular/common/http';
 import { catchError, retry, map, tap, mergeMap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RiotService {
-
-  private heroesUrl = 'api/heroes';  // URL to web api https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/wYTpLyRCmf-LQ2vcMPcZmRsjOeBP6nsIAMbSJMggyO9pW7c
+  private heroesUrl = 'api/heroes'; // URL to web api https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/wYTpLyRCmf-LQ2vcMPcZmRsjOeBP6nsIAMbSJMggyO9pW7c
   private catUrl = 'https://catfact.ninja/fact';
 
   private tempSummoner = {
-    "id": "lZzeadU5wYOm4T0-k9KAHoOPRlOsyzEnDQtezUFgnE2TSs0",
-    "accountId": "Ee1ucHyLwkMNVI-bkuky_cc77mJzZbIAyCC0N9xmEHPPxQ",
-    "puuid": "ZFPvuhcJ8ePhJmJTggZHqrzZPaGH6opflmKXmugq6UdRhi691pNwfbyD94bRhSbJwZfwvAnnfJJetQ",
-    "name": "Failed Lookup",
-    "profileIconId": 1439,
-    "revisionDate": 1633321672000,
-    "summonerLevel": 329
+    id: 'lZzeadU5wYOm4T0-k9KAHoOPRlOsyzEnDQtezUFgnE2TSs0',
+    accountId: 'Ee1ucHyLwkMNVI-bkuky_cc77mJzZbIAyCC0N9xmEHPPxQ',
+    puuid:
+      'ZFPvuhcJ8ePhJmJTggZHqrzZPaGH6opflmKXmugq6UdRhi691pNwfbyD94bRhSbJwZfwvAnnfJJetQ',
+    name: 'Failed Lookup',
+    profileIconId: 1439,
+    revisionDate: 1633321672000,
+    summonerLevel: 329,
   };
 
   private tempLeague = {
-    "leagueId": "0c69175c-26ab-44b7-ab8a-a73d35cee23a",
-    "queueType": "RANKED_SOLO_5x5",
-    "tier": "GOLD",
-    "rank": "IV",
-    "summonerId": "lZzeadU5wYOm4T0-k9KAHoOPRlOsyzEnDQtezUFgnE2TSs0",
-    "summonerName": "Azureus",
-    "leaguePoints": 23,
-    "wins": 148,
-    "losses": 193,
-    "veteran": false,
-    "inactive": false,
-    "freshBlood": false,
-    "hotStreak": false
+    leagueId: '0c69175c-26ab-44b7-ab8a-a73d35cee23a',
+    queueType: 'RANKED_SOLO_5x5',
+    tier: 'GOLD',
+    rank: 'IV',
+    summonerId: 'lZzeadU5wYOm4T0-k9KAHoOPRlOsyzEnDQtezUFgnE2TSs0',
+    summonerName: 'Azureus',
+    leaguePoints: 23,
+    wins: 148,
+    losses: 193,
+    veteran: false,
+    inactive: false,
+    freshBlood: false,
+    hotStreak: false,
   };
 
   private riotUrl = 'https://na1.api.riotgames.com';
@@ -51,7 +56,8 @@ export class RiotService {
 
   constructor(
     private messageService: MessageService,
-    private http: HttpClient) { }
+    private http: HttpClient
+  ) {}
 
   // /** GET summoner from the server */
   // getSummoner(summonerName: string): Observable<Summoner> {
@@ -63,36 +69,35 @@ export class RiotService {
   //     );
   // }
 
-
-
   /** GET summoner from the server */
   getCatFact(): Observable<CatFact> {
     const url = `${this.catUrl}`;
-    return this.http.get<CatFact>(url)
-      .pipe(
-        tap(_ => this.log(`fetched catfact`)),
-        catchError(this.handleError<CatFact>(`get catfact failed`))
-      );
+    return this.http.get<CatFact>(url).pipe(
+      tap((_) => this.log(`fetched catfact`)),
+      catchError(this.handleError<CatFact>(`get catfact failed`))
+    );
   }
 
   /** GET summoner from the server */
   getSummoner(name: string): Observable<Summoner> {
     const url = `${environment.riotUrl}/lol/summoner/v4/summoners/by-name/${name}${environment.apikey}`;
-    return this.http.get<Summoner>(url)
-        .pipe(
-          tap(_ => this.log(`fetched summoner id=${name}`)),
-          catchError(this.handleError<Summoner>(`get summoner=${name}`, this.tempSummoner))
-        );
-    }
+    return this.http.get<Summoner>(url).pipe(
+      tap((_) => this.log(`fetched summoner id=${name}`)),
+      catchError(
+        this.handleError<Summoner>(`get summoner=${name}`, this.tempSummoner)
+      )
+    );
+  }
 
   /** GET leagues from the server */
   getLeague(encyptedSummonerId: string): Observable<League[]> {
     const url = `${environment.riotUrl}/lol/league/v4/entries/by-summoner/${encyptedSummonerId}${environment.apikey}`;
-    return this.http.get<League[]>(url)
-      .pipe(
-        tap(_ => this.log(`fetched league for=${encyptedSummonerId}`)),
-        catchError(this.handleError<League[]>(`get league for=${encyptedSummonerId}`, []))
-      );
+    return this.http.get<League[]>(url).pipe(
+      tap((_) => this.log(`fetched league for=${encyptedSummonerId}`)),
+      catchError(
+        this.handleError<League[]>(`get league for=${encyptedSummonerId}`, [])
+      )
+    );
   }
 
   // private sum: Observable<{}>;
@@ -118,11 +123,12 @@ export class RiotService {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
       console.error(
-        `Backend returned code ${error.status}, body was: `, error.error);
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
     }
     // Return an observable with a user-facing error message.
-    return throwError(
-      'Something bad happened; please try again later.');
+    return throwError('Something bad happened; please try again later.');
   }
 
   /**
@@ -133,7 +139,6 @@ export class RiotService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
       this.log(`${operation} failed: ${error.status}`);
@@ -145,6 +150,4 @@ export class RiotService {
       return of(result as T);
     };
   }
-
 }
-

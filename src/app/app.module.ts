@@ -21,6 +21,13 @@ import { HomeComponent } from './component/home/home.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { CatfactComponent } from './component/catfact/catfact.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
+import { WifeComponent } from './component/wife/wife.component';
+import { SkillsComponent } from './component/skills/skills.component';
+import { SoftskillsComponent } from './component/softskills/softskills.component';
+import { SuiteskillsComponent } from './component/suiteskills/suiteskills.component';
 
 @NgModule({
   imports: [
@@ -28,6 +35,8 @@ import { CatfactComponent } from './component/catfact/catfact.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideRemoteConfig(() => getRemoteConfig()),
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
@@ -51,7 +60,11 @@ import { CatfactComponent } from './component/catfact/catfact.component';
     HomeComponent,
     FooterComponent,
     NavbarComponent,
-    CatfactComponent
+    CatfactComponent,
+    WifeComponent,
+    SkillsComponent,
+    SoftskillsComponent,
+    SuiteskillsComponent
   ],
   bootstrap: [ AppComponent ]
 })

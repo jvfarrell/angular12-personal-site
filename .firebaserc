@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular12-personal-site": {
+      "hosting": {
+        "angular-heroes": [
+          "angular12-personal-site"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular12-personal-site"
+  }
+}

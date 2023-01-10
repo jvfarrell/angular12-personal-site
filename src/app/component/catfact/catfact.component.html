@@ -1,12 +1,14 @@
 
-<div class="container-fluid p-5 w-50">
-  <div class="row p-2">
-    <h2>Cat Fact</h2>
-  </div>
-  <div class="row p-2" *ngIf="haveCatFact">
-    <p>{{catFact?.fact}}</p>
-  </div>
-  <div class="row p-2 w-25">
-    <button class="btn btn-primary"(click)="getCatFact();haveCatFact=true">Lookup CatFact</button>
+<div class="quotebox container">
+  <div class="row">
+    <div class="col align-self-center">
+      <h2 class="quoteheader">Cat Fact</h2>
+      <div class="row quoteheader">
+        <p>{{catFact?.fact}}</p>
+      </div>
+      <div class="row">
+        <button class="btn btn-primary"(click)="getCatFact();haveCatFact=true">Lookup CatFact</button>
+      </div>
+    </div>
   </div>
 </div>
